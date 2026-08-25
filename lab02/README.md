@@ -12,3 +12,5 @@ Y contar con las siguientes librerías instaladas:
 - polars
 - pyspark
 - memory_profiler
+
+* Nota: el procesamiento en PySpark no pude hacerlo dentro de jupyter notebook por problemas técnicos descritos en el notebook principal. Anexo también el notebook secundario (_PySpark) el cual hice en google colab.

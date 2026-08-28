@@ -13,4 +13,6 @@ Y contar con las siguientes librerías instaladas:
 - pyspark
 - memory_profiler
 
+También es necesario extraer el archivo full.pkl desde el comprimido full.zip. Necesario para correr el notebook analisis_pacientes_PySpark.ipynb.
+
 * Nota: el procesamiento en PySpark no pude hacerlo dentro de jupyter notebook por problemas técnicos descritos en el notebook principal. Anexo también el notebook secundario (_PySpark) el cual hice en google colab.

@@ -28,5 +28,5 @@ def merge_full():
             validate='m:1', # aqui en indicator hace que me sobre la columna _merge que no es...
             indicator=False) #...necesaria para el analisis. No es bug pero puede entrar como issue
            )
-    print(full.shape, full.size)
+    print(full.shape)
     return full

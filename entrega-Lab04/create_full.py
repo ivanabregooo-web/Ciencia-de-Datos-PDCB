@@ -26,6 +26,6 @@ def merge_full():
             on = 'patient', # originalmente era solo on = 'patient', sin left o right
             how='left',     # para issue2 (perf)
             validate='m:1', # aqui en indicator hace que me sobre la columna _merge que no es...
-            indicator=True) #...necesaria para el analisis. No es bug pero puede entrar como issue
+            indicator=False) #...necesaria para el analisis. No es bug pero puede entrar como issue
            )
     return full

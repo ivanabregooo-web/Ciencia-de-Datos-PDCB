@@ -1,6 +1,3 @@
-<img src="\[https://github.com/ivanabregooo-web/Ciencia-de-Datos-PDCB/actions/workflows/ci.yml/badge.svg?branch=lab04](https://GitHub.com/ivanabregooo-web/Ciencia-de-Datos-PDCB/actions/workflows/ci.yml/badge.svg?branch=lab04)" alt="CI Status" />
+<img src="https://github.com/ivanabregooo-web/Ciencia-de-Datos-PDCB/actions/workflows/ci.yml/badge.svg?branch=lab04" alt="CI Status" />
 
-
-
-\# Ciencia de Datos PDCB
-
+# Ciencia de Datos PDCB

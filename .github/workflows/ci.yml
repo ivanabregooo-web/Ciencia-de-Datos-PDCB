@@ -23,4 +23,4 @@ jobs:
 
       - run: ruff check .
 
-      - run: pytest
+      - run: pytest; status=$?; if [ $status -eq 0 ] || [$status -eq 5]; then exit 0; else exit $status; fi

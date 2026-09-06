@@ -1,7 +1,7 @@
-import pandas as pd
-from procesar_patients import read_patients
 from procesar_encounters import read_encounters
 from procesar_observations import read_observations
+from procesar_patients import read_patients
+
 
 def merge_full():
     '''

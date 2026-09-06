@@ -1,5 +1,6 @@
 import pandas as pd
 
+
 def read_observations(file):
     '''
     UDF para leer archivo observations.csv con dtypes especificos para optimizar memoria

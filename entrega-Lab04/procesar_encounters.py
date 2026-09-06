@@ -1,5 +1,6 @@
 import pandas as pd
 
+
 def read_encounters(file):
     '''
     UDF para leer archivo encounters.csv con dtypes especificos para optimizar memoria

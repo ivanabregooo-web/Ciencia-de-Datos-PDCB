@@ -1,5 +1,6 @@
 import pandas as pd
 
+
 def read_patients(file):
     '''
     UDF para leer archivo patients.csv con dtypes especificos para optimizar memoria

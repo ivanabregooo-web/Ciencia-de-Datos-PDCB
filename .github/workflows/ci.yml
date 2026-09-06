@@ -23,4 +23,4 @@ jobs:
 
       - run: ruff check .
 
-      - run: pytest; status=$?; if [ $status -eq 0 ] || [ $status -eq 5 ]; then exit 0; else exit $status; fi
+      - run: python -c "import pytest, sys; code = pytest.main(); sys.exit(0 if code in (0, 5) else code)"

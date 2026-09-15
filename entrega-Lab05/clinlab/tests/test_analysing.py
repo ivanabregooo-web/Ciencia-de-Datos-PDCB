@@ -1,11 +1,12 @@
 import pandas as pd
 import pytest
+
 from clinlab.analysing import (
+    count_nans,
+    duplicate_entries,
     filter_by_condition,
     filter_by_value,
-    count_nans,
     time_coherence,
-    duplicate_entries,
 )
 
 

@@ -1,7 +1,8 @@
+from __future__ import annotations
+
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
-
 
 default_physio_ranges = {
     "2708-6": (95.0, 100.0),  # Oxygen saturation
@@ -262,9 +263,8 @@ def plot_obs_distribution(
         raise ValueError(f"No records found for {obs_col}='{obs_identifier}'")
 
     target_range = physio_range
-    if target_range is None:
-        if obs_identifier in default_physio_ranges:
-            target_range = default_physio_ranges[obs_identifier]
+    if target_range is None and obs_identifier in default_physio_ranges:
+        target_range = default_physio_ranges[obs_identifier]
 
     patient_obs_counts = (
         data.groupby("patient", observed=True)
@@ -315,9 +315,12 @@ def plot_obs_distribution(
         transform=ax.transAxes,
         fontsize=10,
         verticalalignment="center",
-        bbox=dict(
-            boxstyle="round,pad=0.5", facecolor="white", edgecolor="gray", alpha=0.8
-        ),
+        bbox={
+            "boxstyle": "round,pad=0.5",
+            "facecolor": "white",
+            "edgecolor": "gray",
+            "alpha": 0.8,
+        },
     )
 
     ax.set_title(f"Distribution of {obs_identifier}")

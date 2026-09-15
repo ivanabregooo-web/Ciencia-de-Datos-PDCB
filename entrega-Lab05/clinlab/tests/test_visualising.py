@@ -1,10 +1,11 @@
-import pytest
-import pandas as pd
 import matplotlib.pyplot as plt
+import pandas as pd
+import pytest
+
 from clinlab.visualising import (
-    plot_obs_distribution,
-    encounter_metrics,
     demographic_counts,
+    encounter_metrics,
+    plot_obs_distribution,
     plot_top_observation_codes,
 )
 

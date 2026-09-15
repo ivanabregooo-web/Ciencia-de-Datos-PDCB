@@ -1,7 +1,10 @@
 import pandas as pd
 import numpy as np
+import matplotlib
 import pytest
 from clinlab.processing import merge_full
+
+matplotlib.use("Agg")
 
 
 @pytest.fixture

@@ -1,7 +1,6 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 import pytest
-
 from clinlab.visualising import (
     demographic_counts,
     encounter_metrics,

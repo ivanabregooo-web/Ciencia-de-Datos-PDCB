@@ -18,3 +18,12 @@ Thumbs.db
 # datos
 *.csv
 *.parquet
+
+# reportes de pytest
+htmlcov/
+.pytest_cache/
+.coverage
+
+# ruff y mypy
+.mypy_cache/
+.ruff_cache/

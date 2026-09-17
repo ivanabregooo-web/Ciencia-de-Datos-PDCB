@@ -21,7 +21,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -e "./entrega-Lab05/clinlab[dev]"
+          pip install -e "./entrega-Lab05-Lab06/clinlab[dev]"
 
       - name: Run Ruff across full repository
         run: ruff check .
@@ -30,3 +30,36 @@ jobs:
         env:
           PYTHONPATH: ./entrega-Lab05/clinlab/src
         run: python -c "import pytest, sys; code = pytest.main(); sys.exit(0 if code in (0, 5) else code)"
+
+  publish:
+    needs: test
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Image name
+        run: |
+          REPO_LOWER=$(echo "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
+          echo "IMAGE_NAME=ghcr.io/$REPO_LOWER/clinlab" >> $GITHUB_ENV
+
+      - name: Build image
+        run: |
+          docker build -t ${{ env.IMAGE_NAME }}:${{ github.sha }} ./entrega-Lab05-Lab06
+
+      - name: Log in
+        if: github.ref == 'refs/heads/lab06'
+        # if: github.ref == 'refs/heads/main'
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+        
+      - name: Push image
+        if: github.ref == 'refs/heads/lab06'
+        # if: github.ref == 'refs/heads/main'
+        run: |
+          docker tag ${{ env.IMAGE_NAME }}:${{ github.sha }} ${{ env.IMAGE_NAME }}:latest
+          docker push ${{ env.IMAGE_NAME }}:latest
+          docker push ${{ env.IMAGE_NAME }}:${{ github.sha }}

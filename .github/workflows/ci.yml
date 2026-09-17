@@ -28,7 +28,7 @@ jobs:
 
       - name: Run Pytest across full repository
         env:
-          PYTHONPATH: ./entrega-Lab05/clinlab/src
+          PYTHONPATH: ./entrega-Lab05-Lab06/clinlab/src
         run: python -c "import pytest, sys; code = pytest.main(); sys.exit(0 if code in (0, 5) else code)"
 
   publish:
@@ -60,6 +60,7 @@ jobs:
         if: github.ref == 'refs/heads/lab06'
         # if: github.ref == 'refs/heads/main'
         run: |
-          docker tag ${{ env.IMAGE_NAME }}:${{ github.sha }} ${{ env.IMAGE_NAME }}:latest
-          docker push ${{ env.IMAGE_NAME }}:latest
+          # cambiar 'latest' por '0.1.0'
+          docker tag ${{ env.IMAGE_NAME }}:${{ github.sha }} ${{ env.IMAGE_NAME }}:0.1.0
+          docker push ${{ env.IMAGE_NAME }}:0.1.0
           docker push ${{ env.IMAGE_NAME }}:${{ github.sha }}

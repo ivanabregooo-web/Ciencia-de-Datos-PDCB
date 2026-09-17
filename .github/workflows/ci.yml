@@ -49,7 +49,7 @@ jobs:
 
       - name: Build image
         run: |
-          docker build -t ${{ env.IMAGE_NAME }}:${{ github.sha }} ./entrega-Lab05-Lab06
+          docker build -t ${{ env.IMAGE_NAME }}:${{ github.sha }} ./entrega-Lab05-Lab06/clinlab
 
       - name: Log in
         if: github.ref == 'refs/heads/lab06'

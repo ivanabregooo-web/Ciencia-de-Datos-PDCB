@@ -1,0 +1,30 @@
+services:
+  db:
+    image: postgres:15-alpine
+    ports:
+      - "${DB_HOST_PORT}:5432"
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: "${DB_PASSWORD:?ERROR: se debe ingresar contraseña desde archivo .env}"
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./initdb:/docker-entrypoint-initdb.d/
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  adminer:
+    image: adminer
+    ports:
+      - "${ADMINER_PORT}:8080"
+    profiles:
+      - dev
+    depends_on:
+      - db
+
+volumes:
+  postgres-data:

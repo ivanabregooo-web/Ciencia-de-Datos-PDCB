@@ -1,4 +1,5 @@
 import os
+
 import psycopg2
 from flask import Flask, jsonify
 
@@ -32,7 +33,7 @@ def test_db_connection():
             }
         )
 
-    except Exception as e:
+    except psycopg2.Error as e:
         return jsonify(
             {
                 "status": "error",

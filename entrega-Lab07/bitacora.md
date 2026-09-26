@@ -1,0 +1,35 @@
+2. Las cadenas se hablan por nombre:
+
+Al conectarse a postgres por fuera de docker, fue necesario hardcodear las credenciales de inicio de sesión y especificar los puertos 54320:5432 para tener una conexión exitosa. Esto no es necesario al conectarse a través de docker ya que los contenedores pueden comunicarse usando únicamente los nombres de los servicios. También, docker permite inyectar las credenciales directamente desde los archivos .env.
+
+
+
+3. Inicializar la base:
+
+Después de haber modificado uno de los scripts de SQL y volver a hacer up, el cambio no se aplicó. Esto es debido a que los scripts de la carpeta init se ejecutan en orden alfabético cuando el volumen está vacío, pero al ya haberlo usado antes del cambio, el volumen ya tenía datos. Para que el cambio se refleje es necesario vaciar el contenedor o tirar los datos mediante docker compose down -v para que al inicializar de nuevo, el volumen este vacío y los scripts sean releídos.
+
+
+4. Persistencia: qué sobrevive y qué no:
+| Comando | ¿Sobreviven los datos? | ¿Por qué? |
+|---------|------------------------|-----------|
+|docker compose restart | sí | únicamente se reinicia el contenedor, no se vacían los volúmenes creados|
+|docker compose down + up | sí | se cierra el contenedor, pero los volúmenes creados se mantienen en memoria |
+|docker compose down -v + up | no | la bandera -v fuerza que se eliminen los volúmenes |
+
+8. Depurar a propósito:
+Solo que no rompí nada deliberadamente, de verdad me equivoqué en algo al meter las credenciales en el .env y mi jupyter no hacía conexión (fig. 8_0), así que aproveché para hacer el ejercicio del debug.
+Bitácora:
+| Paso | Hallazgo |
+|------|----------|
+| docker compose ps | Dice que jupyter está up & healthy (fig. 8_1) |
+| docker compose logs jupyter | (fig. 8_2) Al último sólo dice que se saltó algunos installs pero ese no parece ser el problema, también se ve que localhost está mandando desde el port 9000 que sí es como yo lo configuré en el .env |
+| docker compose exec jupyter curl -v http://localhost:8888 | viendo desde adentro al puerto default donde jupyter recibe veo que tuve un typo y se rechazó la conexión (fig. 8_3). Corregí el typo y jupyter seguía sin conectar entonces: |
+| docker compose exec jupyter curl -v http://localhost:9000 | viendo desde adentro al puerto desde donde localhost manda (fig. 8_4) veo que de ese lado no se rechazó la conexión y llama a un TornadoServer, que investigando en internet veo que es un servidor específico para python. Entonces el problema está del lado del localhost |
+| diagnóstico final | Despúes de investigar un rato(+), veo que el error estuvo en nombrar JUPYTER_PORT = 9000 en mi .env, ya que ese nombre de variable es usado internamente por jupyter para saber en qué puerto buscar conexión. Dejó de usar el default 8888 y en vez de ese empezó a usar el 9000. Pero mi archivo .yml estaba mandando al 8888, ocasionando la conexión rota. Al cambiar el nombre de la variable a JUPYTER_HOST_PORT dejó de usarla para cambiar el default donde jupyter busca y se estableció correctamente la conexión 9000:8888. Con eso, desde el navegador en localhost:9000 ya podía acceder a jupyter (fig. 8_5) |
+ +: https://jupyter-docker-stacks.readthedocs.io/en/latest/using/common.html |
+
+
+10. Comparar con la referencia:
+	- 1: la solución levanta todo el compose desde un sólo archivo. Siguiendo el ejemplo de la quickstart de docker compose, yo separé los servicios en compose.yml, que levanta la app de prueba y jupyter, e infra.yml, que levanta postgres. 
+	- 2: puertos del lado izquierdo. En la solución se usan 5432 para postgres y 8888 para jupyter. Yo tuve que usar 54320 para postgres, debido a que 5432 y 5433 ya estaban ocupados, por lo que entiendo debido a una particularidad de windows. Para jupyter, tuve que usar 9000, ya que al momento de levantar las primeras pruebas del compose tenía otro archivo de jupyter abierto desde anaconda navigator y por default utiliza ese puerto. Estos cambios no afectan la funcionalidad pero es bueno conocer las particularidades que bloquean ciertos puertos.
+	- 3: en la solución, se usa la sintaxis ${variable:-default} para inyectar las credenciales, la cual logra que se pase el valor necesario por default si es que el usuario no pasa la propia. En mi caso únicamente la contraseña tiene algún tipo de respaldo al soltar el mensaje de error si no se pasa, pero el resto de credenciales pararían el build si no son pasadas. 

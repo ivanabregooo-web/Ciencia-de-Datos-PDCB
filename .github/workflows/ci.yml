@@ -57,15 +57,12 @@ jobs:
           docker build -t ${{ env.IMAGE_NAME }}:${{ github.sha }} ./entrega-Lab05-Lab06/clinlab
 
       - name: Log in
-        if: github.ref == 'refs/heads/lab06'
-        # if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main'
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
         
       - name: Push image
-        if: github.ref == 'refs/heads/lab06'
-        # if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main'
         run: |
-          # cambiar 'latest' por '0.1.0'
           docker tag ${{ env.IMAGE_NAME }}:${{ github.sha }} ${{ env.IMAGE_NAME }}:${{ env.APP_VERSION }}
           docker push ${{ env.IMAGE_NAME }}:${{ env.APP_VERSION }}
           docker push ${{ env.IMAGE_NAME }}:${{ github.sha }}

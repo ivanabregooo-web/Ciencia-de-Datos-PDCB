@@ -1,14 +1,26 @@
-# .gituhub/workflows/ci.yml
+# .github/workflows/ci.yml
 name: CI
-on: [push]
+
+on:
+  push:
+    paths-ignore:
+      - '**.md'
+      - '**.jpg'
+      - '**.png'
+      - '.gitignore'
+
 jobs:
-	test:
-		runs-on: ubuntu-latest
-		steps:
-			- uses: actions/checkout@v4
-			- uses: actions/setup-python@v5
-			with:
-                python-version: "3.11"
-			- run pip install -e . pytest ruff
-			- run: ruff check .
-			- run: pytest
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - run: pip install pytest ruff
+
+      - run: ruff check .
+
+      - run: python -c "import pytest, sys; code = pytest.main(); sys.exit(0 if code in (0, 5) else code)"

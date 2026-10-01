@@ -1,5 +1,6 @@
 import pandas as pd
 import pytest
+
 from clinlab.analysing import (
     count_nans,
     duplicate_entries,

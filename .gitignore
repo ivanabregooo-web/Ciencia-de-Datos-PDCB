@@ -20,6 +20,10 @@ Thumbs.db
 # datos
 *.csv
 *.parquet
+data/
+*.json
+*.sqlite
+*.log
 
 # reportes de pytest
 htmlcov/

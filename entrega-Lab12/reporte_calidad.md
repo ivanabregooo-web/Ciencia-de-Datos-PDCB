@@ -180,49 +180,53 @@ Practicamente todas las observaciones caen dentro del periodo de observacion. Mu
 - d) 
 
 Synthea, propios, top20 diagnosticos:
-Gingivitis	30115
-Limited social contact	11453
-Viral sinusitis	11334
-Social isolation	11127
-Gingival disease	8874
-Primary dental caries	6740
-Acute viral pharyngitis	6531
-Acute bronchitis	5426
-Body mass index 30+ - obesity	5339
-Normal pregnancy	4835
-Prediabetes	4238
-Anemia	4044
-Risk activity involvement	2844
-Chronic pain	2653
-Essential hypertension	2507
-Chronic sinusitis	2341
-Abnormal findings diagnostic imaging heart+coronary circulat	2118
-Ischemic heart disease	2109
-Infection of tooth	1998
-Chronic low back pain	1949
+diagnosis	total_cases	unique_patients
+Gingivitis	30115	8926
+Viral sinusitis	11334	7040
+Limited social contact	11453	6051
+Social isolation	11127	5936
+Body mass index 30+- obesity	5339	5339
+Gingival disease	8874	5161
+Acute viral pharyngitis	6531	4890
+Primary dental caries	6740	4669
+Acute bronchitis	5426	4382
+Prediabetes	4238	4238
+Anemia	4044	4044
+Chronic pain	2653	2653
+Risk activity involvement	2844	2650
+Essential hypertension	2507	2507
+Chronic sinusitis	2341	2340
+Abnormal findings diagnostic imaging heart+coronary circulat	2118	2118
+Ischemic heart disease	2109	2109
+Normal pregnancy	4835	2038
+Chronic low back pain	1949	1949
+Infection of tooth	1998	1660
+
 
 
 Eunomia, top 20 diagnosticos:
-Viral sinusitis	17268
-Acute viral pharyngitis	10217
-Acute bronchitis	8184
-Otitis media	3605
-Osteoarthritis	2694
-Streptococcal sore throat	2656
-Sprain of ankle	1915
-Concussion with no loss of consciousness	1013
-Sinusitis	1001
-Acute bacterial sinusitis	939
-Whiplash injury to neck	825
-Chronic sinusitis	825
-Peptic ulcer	802
-Sprain of wrist	770
-Fracture of forearm	569
-Laceration of forearm	507
-Laceration of hand	500
-Laceration of thigh	499
-Facial laceration	497
-Fracture subluxation of wrist	493
+diagnosis	total_cases	unique_patients
+Viral sinusitis	17268	2686
+Acute viral pharyngitis	10217	2606
+Acute bronchitis	8184	2543
+Otitis media	3605	2025
+Osteoarthritis	2694	2694
+Streptococcal sore throat	2656	1677
+Sprain of ankle	1915	1357
+Concussion with no loss of consciousness	1013	852
+Sinusitis	1001	833
+Acute bacterial sinusitis	939	786
+Whiplash injury to neck	825	708
+Chronic sinusitis	825	812
+Peptic ulcer	802	802
+Sprain of wrist	770	677
+Fracture of forearm	569	510
+Laceration of forearm	507	459
+Laceration of hand	500	462
+Laceration of thigh	499	455
+Facial laceration	497	459
+Fracture subluxation of wrist	493	442
+
 
 
 En este caso no se parecen tanto, solo veo sinusitis y bronquitis compartidas entre ambas. Sin embargo, todas las condiciones encontradas aqui son habituales, lo cual si le da cierto realismo a ambos datasets.

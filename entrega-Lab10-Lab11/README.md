@@ -1,11 +1,11 @@
 Para reproducir el analisis en el jupyter notebook:
 
 - docker necesario para conectar con postgres. Desde la terminal (anaconda prompt), ubicado en la misma carpeta donde el archivo .env este ubicado:
-	>docker run --name my_postgres --env-file .env -p 5432:5432 -d postgres:15.4
+	>docker run --rm --name my_postgres --env-file .env -p 5432:5432 -d postgres:15.4
 - plugin para usar comando magico %%sql dentro del notebook y poder usar directamente comandos de sql sin usar comillas:
 	> pip install jupysql
 Al finalizar:
-	>docker rm -f my_postgres
+	>docker stop my_postgres
 
 *Entrega Lab10:*
 
